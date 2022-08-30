@@ -6,8 +6,8 @@ from posts.models import Post
 class PostForm(ModelForm):
     class Meta:
         model = Post
+        fields = ('text', 'group')
         labels = {
             'group': 'Группа',
             'text': 'Текст'
         }
-        fields = '__all__'
