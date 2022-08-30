@@ -17,8 +17,10 @@
         </p>
         {% if post.group %}
           <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
+        {% else %}
+          <span style='color: red'>Этой публикации нет ни в одном сообществе.</span>
         {% endif %}
-      {% if not forloop.last %}<hr>{% endif %}
+        {% if not forloop.last %}<hr>{% endif %}
       </article>
     {% endfor %}
   </div>

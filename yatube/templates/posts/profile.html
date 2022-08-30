@@ -10,7 +10,7 @@
       <ul>
         <li>
           Автор: {{ posts.author.get_full_name }}
-          <a href="{% url "posts:profile" author.username %}">все посты пользователя</a>
+          <a href="{% url 'posts:profile' author.username %}">все посты пользователя</a>
         </li>
         <li>
           Дата публикации: {{ posts.pub_date|date:"d E Y"}}
@@ -22,7 +22,7 @@
         <a href="{% url 'posts:post_detail' author.pk %}">подробная информация </a>
       </article>    
       {% if posts.group %}   
-      <a href="{% url 'posts:group_list' posts.group.slug %}">все записи группы</a>
+        <a href="{% url 'posts:group_list' posts.group.slug %}">все записи группы</a>
       {% endif %} 
       <hr>
       {% endfor %}

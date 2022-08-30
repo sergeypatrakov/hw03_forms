@@ -9,12 +9,14 @@
           Дата публикации: {{ post.pub_date|date:"d E Y" }}
         </li>
         {% if post.group %}  
-        <li class="list-group-item">
-          Группа: {{ posts.group.title }}
-          <a href="{% url "posts:group_posts" posts.group.slug %}">
-            все записи группы
-          </a>
-        </li>
+          <li class="list-group-item">
+            Группа: {{ posts.group.title }}
+            <a href="{% url "posts:group_posts" posts.group.slug %}">
+              все записи группы
+            </a>
+          </li>
+        {% else %}
+          <span style='color: red'>Этой публикации нет ни в одном сообществе.</span>
         {% endif %}
         <li class="list-group-item">
           Автор: {{ posts.author.get_full_name }}
