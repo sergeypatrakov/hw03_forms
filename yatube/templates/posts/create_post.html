@@ -21,36 +21,11 @@
           {% endif %}                     
         </div>
         <div class="card-body">
-          {% if form.errors %}
-              {% for field in form %}
-                {% for error in field.errors %}            
-                  <div class="alert alert-danger">
-                    {{ error|escape }}
-                  </div>
-                {% endfor %}
-              {% endfor %}
-              {% for error in form.non_field_errors %}
-                <div class="alert alert-danger">
-                  {{ error|escape }}
-                </div>
-              {% endfor %}
-          {% endif %}
+          {% include 'includes/error_block.html' with form=form %}
           
           <form method="post" enctype="multipart/form-data" href="{% url 'posts:post_create' %}">
             {% csrf_token %}
-            {% for field in form %} 
-            <div class="form-group row my-3 p-3">
-              <label for="id_text">
-                {{ field.label }}                  
-                <span class="required text-danger" >*</span>                  
-              </label>
-                {{ field }}
-              </textarea>                
-              <small id="id_text-help" class="form-text text-muted">
-                {{ form.text.help_text }}
-              </small>
-            </div>
-            {% endfor %}                  
+            {% include 'includes/field_block.html' with form=form %}        
             <div class="d-flex justify-content-end">
               <button type="submit" class="btn btn-primary">
                 {% if is_edit %}

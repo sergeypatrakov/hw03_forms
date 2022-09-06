@@ -12,7 +12,7 @@
             href="{% url 'about:author' %}">Об авторе</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {% if view_name == 'about:author' %}active{% endif %}"
+            <a class="nav-link {% if view_name == 'about:tech' %}active{% endif %}"
             href="{% url 'about:tech' %}">Технологии</a>
           </li>
           {% if user.is_authenticated %}
@@ -27,8 +27,9 @@
             <a class="nav-link link-light" 
             href="{% url 'users:logout' %}">Выйти</a>
           </li>
-          <li>
-            Пользователь: {{ user.username }} 
+          <li class="nav-item"> 
+            <a class="nav-link link-light" 
+            href="{% url 'posts:profile' user.username %}">Пользователь {{user.username}}</a>
           </li>
           {% else %}
           <li class="nav-item"> 

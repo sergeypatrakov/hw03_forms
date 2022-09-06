@@ -11,3 +11,7 @@ class PostForm(ModelForm):
             'group': 'Группа',
             'text': 'Текст'
         }
+        help_texts = {
+            "text": "Обязательное поле!",
+            "group": "Необязательное поле!",
+        }
