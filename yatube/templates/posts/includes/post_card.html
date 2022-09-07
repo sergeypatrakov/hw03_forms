@@ -19,10 +19,6 @@
   </p>
   <p>
     <a href="{% url 'posts:post_detail' post.id %}">Подробная информация </a>
-    <br>
-    {% if post.author == user %}
-      <a href="{% url 'posts:post_edit' post.id %}">Редактировать. </a>
-    {% endif %}
   </p>
   <p>
     {% if post.group %}
