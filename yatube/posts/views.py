@@ -28,7 +28,7 @@ def group_posts(request, slug):
 
 def profile(request, username):
     author = get_object_or_404(User, username=username)
-    post_list = Post.objects.filter(author=author)
+    post_list = author.posts.select_related('group').filter(author=author)
     page_obj = get_page(request, post_list)
     context = {
         'page_obj': page_obj,
@@ -39,7 +39,6 @@ def profile(request, username):
 
 def post_detail(request, post_id):
     post = get_object_or_404(Post, id=post_id)
-
     context = {
         'post': post,
     }
@@ -62,9 +61,9 @@ def post_create(request):
 
 @login_required
 def post_edit(request, post_id):
-    post = get_object_or_404(Post, pk=post_id)
+    post = get_object_or_404(Post, id=post_id)
     if request.user != post.author:
-        return redirect("posts:post_detail", post_id=post.pk)
+        return redirect("posts:post_detail", post_id)
     form = PostForm(request.POST or None, instance=post)
     if form.is_valid():
         form.save()
