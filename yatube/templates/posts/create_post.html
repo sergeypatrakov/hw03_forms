@@ -16,9 +16,12 @@
             {% if form.instance.pk %}Редактировать пост{% else %}Новый пост{% endif %}
           </div>
           <div class="card-body">
-            {% include 'includes/error_block.html' with form=form %}
-            
-            <form method="post" enctype="multipart/form-data" href="{% url 'posts:post_create' %}">
+            {% include 'includes/error_block.html' %}
+              {% if form.instance.pk %}
+                <form method="post" href="{% url 'posts:post_edit' form.instance.pk %}">
+              {% else %}
+                <form method="post" enctype="multipart/form-data" href="{% url 'posts:post_create' %}">
+              {% endif %}
               {% csrf_token %}
               {% include 'includes/field_block.html' with form=form %}        
               <div class="d-flex justify-content-end">

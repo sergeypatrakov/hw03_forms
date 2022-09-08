@@ -21,9 +21,9 @@
   </p>
   <p>
     {% if 'group_flag=True' %}
-      <span style='color: red'>Этой публикации нет ни в одном сообществе.</span>
-    {% else %}
       <a href="{% url 'posts:group_list' post.group.slug %}">#{{ post.group.title }}</a>
+    {% else %}
+      <span style='color: red'>Этой публикации нет ни в одном сообществе.</span>
     {% endif %}
   </p>
 </article>    
