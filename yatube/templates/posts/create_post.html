@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}
-{% if is_edit %}
+{% if form.instance.pk %}
   Редактировать запись
 {% else %}
   Добавить запись
@@ -13,20 +13,22 @@
       <div class="col-md-8 p-5">
         <div class="card">
           <div class="card-header">
-            {% if is_edit %}Редактировать пост{% else %}Новый пост{% endif %}
+            {% if form.instance.pk %}Редактировать пост{% else %}Новый пост{% endif %}
           </div>
           <div class="card-body">
             {% include 'includes/error_block.html' with form=form %}
-            
-            <form method="post" enctype="multipart/form-data" href="{% url 'posts:post_create' %}">
-              {% csrf_token %}
-              {% include 'includes/field_block.html' with form=form %}        
-              <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary">
-                  {% if is_edit %}Сохранить{% else %}Добавить{% endif %}
-                </button>
-              </div>
-            </form>
+              {% if form.instance.pk %}
+                <form method="post" href="{% url 'posts:post_edit' %}%">
+              {% else %}
+                <form method="post" enctype="multipart/form-data" href="{% url 'posts:post_create' %}">
+                {% csrf_token %}
+                {% include 'includes/field_block.html' with form=form %}        
+                <div class="d-flex justify-content-end">
+                  <button type="submit" class="btn btn-primary">
+                    {% if form.instance.pk %}Сохранить{% else %}Добавить{% endif %}
+                  </button>
+                </div>
+              </form>
           </div>
         </div>
       </div>

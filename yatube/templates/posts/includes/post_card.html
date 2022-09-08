@@ -1,13 +1,12 @@
 <article>
   <ul>
     <li>
-      Автор: 
+      Автор: {% if 'profile_flag=True' %}
       <a href="{% url 'posts:profile' post.author.username %}">
-        {% if post.author.get_full_name %} 
-          {{ post.author.get_full_name }} 
-        {% else %} 
-          {{ post.author.username }} 
-        {% endif %}
+      {{ post.author.get_full_name }} 
+    {% else %} 
+      {{ post.author.username }} 
+    {% endif %}
       </a>
     </li>
     <li>
@@ -21,10 +20,10 @@
     <a href="{% url 'posts:post_detail' post.id %}">Подробная информация </a>
   </p>
   <p>
-    {% if post.group %}
-      <a href="{% url 'posts:group_list' post.group.slug %}">#{{ post.group.title }}</a>
-    {% else %}
+    {% if 'group_flag=True' %}
       <span style='color: red'>Этой публикации нет ни в одном сообществе.</span>
+    {% else %}
+      <a href="{% url 'posts:group_list' post.group.slug %}">#{{ post.group.title }}</a>
     {% endif %}
   </p>
 </article>    
